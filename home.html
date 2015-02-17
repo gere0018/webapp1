@@ -8,24 +8,41 @@
 </head>
 
 <body>
-    <div id = "home" class = "active" data-role = "page">
-        <div class = "navBar">
-            <ul>
-                <li><a href = "#home" class = "button"></a></li>
-            </ul>
-        </div>
-        <h2>App 1</h2>
-        <p>This App is a a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
-    </div>
-    <div id = "location" data-role = "page">
+<!--Header************************************************************-->
+    <header class = "appTitle">
+        <h1>Application One</h1>
+    </header>
+<!--Navigation********************************************************-->
+    <nav class = "navBar">
+        <ul>
+            <li><a href = "#home" class = " activeTab button">Home</a></li>
+            <li><a href = "#location" class = "button">Location</a></li>
+            <li><a href = "#contact" class = "button">Contact</a></li>
+        </ul>
+    </nav>
+<!--Page # 1***********************************************************-->
+    <section id = "home" data-role = "page" class = "activePage">
+        <h2>The Application</h2>
+        <p>This App is a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
+    </section>
+
+<!--Page # 2***********************************************************-->
+    <section id = "location" data-role = "page">
+        <p>Your current location is:</p>
         <div id="output">
 
        </div>
-    </div>
+
+<!--Page # 3***********************************************************-->
+    </section>
     <div id = "contact"  data-role = "page">
+        <p>Please wait while we load your contact...</p>
     </div>
 
-
+<!--Footer*************************************************************-->
+    <footer class = "footer">
+        <p>&copy; Nehmat Gereige 2015</p>
+    </footer>
     <script src=""></script>
 </body>
 </html>
