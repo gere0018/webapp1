@@ -7,7 +7,7 @@ var app1_gere0018 = {
         this.bindEvents();
     },
     bindEvents: function() {
-//        document.addEventListener('deviceready', this.onDeviceReady, false);
+//      document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener("DOMContentLoaded", this.onDeviceReady, false);
     },
     onDeviceReady: function() {
@@ -21,7 +21,7 @@ var app1_gere0018 = {
     navigate:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
-	   links = document.querySelectorAll(".button");
+	   links = document.body.querySelectorAll(".button");
 	   numLinks = links.length;
 	   for(var i=0;i<numLinks; i++){
            if(app1_gere0018.detectTouchSupport( )){
@@ -35,7 +35,7 @@ var app1_gere0018 = {
     handleTouch:function (ev){
       ev.preventDefault();
       ev.stopImmediatePropagation();
-      var touch = evt.changedTouches[0];        //this is the first object touched
+      var touch = evt.changedTouches[0]; //this is the first object touched
       var newEvt = document.createEvent("MouseEvent");
       //old method works across browsers, though it is deprecated.
       newEvt.initMouseEvent("click", true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY);
@@ -69,7 +69,8 @@ var app1_gere0018 = {
         for(var t=0; t < numLinks; t++){
           links[t].className = "";
           if(links[t].href == location.href){
-            links[t].className = "activetab";
+            links[t].className = "activeTab";
+            app1_gere0018.setLocation();
           }
         }
         }
@@ -100,20 +101,17 @@ var app1_gere0018 = {
       return touchSupport;
     },
     setLocation: function(){
+        console.log("location called");
         if( navigator.geolocation ){
         var getLocation = {enableHighAccuracy: false, timeout:60000, maximumAge:60000};
-        navigator.geolocation.getCurrentPosition( reportPosition, gpsError, getLocation);
+        navigator.geolocation.getCurrentPosition( app1_gere0018.reportPosition, app1_gere0018.gpsError, app1_gere0018.getLocation);
         //If it doesn't alert the user with the following message.
         }else{
             alert("OOPS!! your browser needs to be updated and currently does not support location based services.")
         }
     },
     reportPosition:function( position ){
-         var output = document.querySelector("#output");
-         output.innerHTML += "Latitude: " + position.coords.latitude + "&deg;<br/>"
-          + "Longitude: " + position.coords.longitude + "&deg;<br/>"
-          //draw the image of the map on the canvas when this function is called
-         drawImage(position);
+         app1_gere0018.drawImage(position);
         },
 
     drawImage:function(position){
@@ -131,10 +129,14 @@ var app1_gere0018 = {
       };
      imageObj.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + ","+ position.coords.longitude + "&zoom=14&size=400x400&markers=color:red%7C" + position.coords.latitude + ","+ position.coords.longitude + "&key=AIzaSyAOXUJlnbNxvV7HRtrslv_vFBT7tCJ4VZc";
 // append the canvas to the div with id output.
-document.querySelector("#output").appendChild(canvas);
-//after loading the map image, remove the message asking the user to wait for loading.
-var waitMsg = document.querySelector("#waitMsg");
- waitMsg.parentNode.removeChild(waitMsg);
+     var output = document.querySelector("#output");
+     var msg = document.createElement("p");
+     msg.innerHTML = "Your current location is: ";
+    output.appendChild(msg);
+    output.appendChild(canvas);
+    //after loading the map image, remove the message asking the user to wait for loading.
+    var waitMsg = document.querySelector("#waitMsg");
+     waitMsg.parentNode.removeChild(waitMsg);
 },
     gpsError:function ( error ){
       var errors = {
@@ -145,11 +147,6 @@ var waitMsg = document.querySelector("#waitMsg");
  //in case of erros the following function gives an explanation of type of error to the user.
       alert("Error: " + errors[error.code]);
     }
-
-
-
-
-
 
 };
 app1_gere0018.initialize();
