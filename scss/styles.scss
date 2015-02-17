@@ -6,6 +6,7 @@
 }
 html, body{
     background-color: #FFF0B2;
+    overflow-x: hidden;
 }
 html {
     -ms-touch-action: manipulation;
@@ -96,7 +97,7 @@ P{
 .footer{
     background-color: #CCCCCC;
     margin: 0.2rem;
-    margin-top: 10rem;
+    margin-top: 80%;
     padding: 0.5rem;
     P{
         text-align: center;
