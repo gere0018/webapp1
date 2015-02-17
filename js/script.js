@@ -1,14 +1,14 @@
 var app1_gere0018 = {
     page:[],
-    numPages:"",
+    numPages:0,
     links:[],
-    numLinks:"",
+    numLinks:0,
     initialize: function() {
-        this.bindEvents();
+        app1_gere0018.bindEvents();
     },
     bindEvents: function() {
-//      document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener("DOMContentLoaded", this.onDeviceReady, false);
+//      document.addEventListener('deviceready', app1_gere0018.onDeviceReady, false);
+        document.addEventListener("DOMContentLoaded", app1_gere0018.onDeviceReady, false);
     },
     onDeviceReady: function() {
     app1_gere0018.receivedEvent('deviceready');
@@ -21,10 +21,11 @@ var app1_gere0018 = {
     navigate:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
-	   links = document.body.querySelectorAll(".button");
+	   links = document.querySelectorAll(".button");
 	   numLinks = links.length;
 	   for(var i=0;i<numLinks; i++){
            if(app1_gere0018.detectTouchSupport( )){
+               //ask Steve how our shopping app worked without touch event??????
             links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
             }
             links[i].addEventListener("click", app1_gere0018.handleNav, false);
@@ -32,6 +33,7 @@ var app1_gere0018 = {
         window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
 	    app1_gere0018.loadPage(null);
     },
+    //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
       ev.preventDefault();
       ev.stopImmediatePropagation();
@@ -46,33 +48,36 @@ var app1_gere0018 = {
     handleNav:function (ev){
         ev.preventDefault();
         var href = ev.target.href;
-        var parts = href.split("#");
+        var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
+        //ask Steve what is return false for??????
       return false;
     },
     //Deal with history API and switching divs
     loadPage:function ( url ){
         if(url == null){
             //home page first call
-            pages[0].style.display = 'block';
+            //pages[0].style.display = 'block'; not needed already in html
             history.replaceState(null, null, "#home");
         }else{
+            //loop through pages
+            for(var i=0; i < numPages; i++){
+              if(pages[i].id == url){
+                pages[i].className = "activePage";
+                history.pushState(null, null, "#" + url);
+              }else{
+                pages[i].style.display = "none";
+              }
+            }
+            //loop through links
+            for(var t=0; t < numLinks; t++){
+              links[t].className = "button";
+//location is a property of the window object that returns current location url of the document.
+              if(links[t].href == window.location.href){
+                links[t].className += " activeTab";
 
-        for(var i=0; i < numPages; i++){
-          if(pages[i].id == url){
-            pages[i].style.display = "block";
-            history.pushState(null, null, "#" + url);
-          }else{
-            pages[i].style.display = "none";
-          }
-        }
-        for(var t=0; t < numLinks; t++){
-          links[t].className = "";
-          if(links[t].href == location.href){
-            links[t].className = "activeTab";
-            app1_gere0018.setLocation();
-          }
-        }
+              }
+            }
         }
     },
     //Need a listener for the popstate event to handle the back button
@@ -150,7 +155,6 @@ var app1_gere0018 = {
 
 };
 app1_gere0018.initialize();
-
 
 
 
