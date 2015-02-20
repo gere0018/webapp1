@@ -16,8 +16,10 @@ var app1_gere0018 = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
       app1_gere0018.navigate();
+        app1_gere0018.init();
 
     },
+
     navigate:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
@@ -32,6 +34,11 @@ var app1_gere0018 = {
             }
         window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
 	    app1_gere0018.loadPage(null);
+    },
+    init: function(){
+        for(var p=0;p<pages.length; p++){
+            pages[p].addEventListener("click", app1_gere0018.doAnimation);
+        }
     },
     //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
@@ -53,6 +60,33 @@ var app1_gere0018 = {
         //ask Steve what is return false for??????
       return false;
     },
+    doAnimation: function(ev){
+	var page = ev.currentTarget;
+	//clicked page needs to disappear and other page needs to appear
+	for(var p=0;p<pages.length; p++){
+		if(page == pages[p]){
+			//found the page to hide
+			//remove the class active to make it animate off the page
+			pages[p].className = "show";
+			//animation off the page is set to take 0.4 seconds
+			setTimeout(hidePage, 400, pages[p]);
+		}else{
+			//page needs to show
+			pages[p].className = "show";
+			//now add the class active to animate.
+			setTimeout(showPage, 10, pages[p]);
+		}
+	}
+},
+
+ hidePage: function(pg){
+	pg.className = "hide";
+	//this class replaces show
+},
+
+ showPage:function(pg){
+	pg.classList.add("active");
+},
     //Deal with history API and switching divs
     loadPage:function ( url ){
         if(url == null){
@@ -82,19 +116,19 @@ var app1_gere0018 = {
     },
     //Need a listener for the popstate event to handle the back button
     browserBackButton:function (ev){
-      url = location.hash;  //hash will include the "#"
+      url = window.location.hash;  //hash will include the "#" + the string after it.
       //update the visible div and the active tab
       for(var i=0; i < numPages; i++){
           if(("#" + pages[i].id) == url){
-            pages[i].style.display = "block";
+            pages[i].className = "activePage";
           }else{
             pages[i].style.display = "none";
           }
       }
       for(var t=0; t < numLinks; t++){
-        links[t].className = "";
+        links[t].classList.remove("activeTab");
         if(links[t].href == location.href){
-          links[t].className = "activeTab";
+          links[t].classList.add("activeTab");
         }
       }
     },

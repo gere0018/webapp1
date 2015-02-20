@@ -76,6 +76,26 @@ P{
     color: #484848;
     padding: 1rem;
     display: none;
+    //for page transition
+    position:absolute;
+    left:100%;
+    width:100%;
+    top: 8rem;
+    transition: left 0.8s ease;
+    z-index: 5;
+     -webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -ms-backface-visibility: hidden;
+   backface-visibility: hidden;
+   -webkit-perspective: 1000;
+   -moz-perspective: 1000;
+   -ms-perspective: 1000;
+   perspective: 1000;
+   -webkit-transform: translate3d(0, 0, 0);
+   -moz-transform: translate3d(0, 0, 0);
+   -ms-transform: translate3d(0, 0, 0);
+   transform: translate3d(0, 0, 0);
+
     h2{
         text-align: center;
         font-weight: 150;
@@ -84,12 +104,19 @@ P{
         font-family: "Garamond", sans-serif;
     }
 
-
 }
 [data-role = "page"].activePage{
         display: block;
-    }
+        left: 0;
+        z-index: 10;
 
+    }
+.show{
+	display:block;
+}
+.hide{
+	display:none;
+}
 
 //Footer****************************************************************
 
@@ -102,3 +129,68 @@ P{
         text-align: center;
     }
 }
+//Page Transitions ****************************************************************
+
+
+
+
+
+
+
+
+
+
+
+//.example {
+//    -webkit-transition: background-color 500ms ease-out 1s;
+//    -moz-transition: background-color 500ms ease-out 1s;
+//    -o-transition: background-color 500ms ease-out 1s;
+//    transition: background-color 500ms ease-out 1s;
+//}
+//
+//
+//.pt-perspective {
+//	position: relative;
+//	width: 100%;
+//	height: 100%;
+//	perspective: 1200px;
+//	transform-style: preserve-3d;
+//}
+//[data-role = "page"]{
+//    width: 100%;
+//	height: 100%;
+//	position: absolute;
+//	top: 0;
+//	left: 0;
+//	visibility: hidden;
+//	overflow: hidden;
+//	backface-visibility: hidden;
+//	transform: translate3d(0, 0, 0);
+//
+//}
+//.pt-page-current,
+//.no-js .pt-page {
+//	visibility: visible;
+//}
+//
+//.no-js body {
+//	overflow: auto;
+//}
+//
+//.pt-page-ontop {
+//	z-index: 999;
+//}
+//.pt-page-scaleDown {
+//	animation: scaleDown .7s ease both;
+//}
+//@keyframes scaleDown {
+//	to { opacity: 0; transform: scale(.8); }
+//}
+//
+//
+//.pt-page-rotateCarouselRightOut {
+//	-webkit-transform-origin: 0% 50%;
+//	transform-origin: 0% 50%;
+//	-webkit-animation: rotateCarouselRightOut .8s both ease;
+//	animation: rotateCarouselRightOut .8s both ease;
+//}

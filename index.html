@@ -20,24 +20,27 @@
             <li><a href = "#contact" class = "button">Contact</a></li>
         </ul>
     </nav>
-<!--Page # 1***********************************************************-->
-    <section id = "home" data-role = "page" class = "activePage">
-        <h2>The Application</h2>
-        <p>This App is a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
-    </section>
+    <div class = "pt-perspective">
+    <!--Page # 1***********************************************************-->
+        <section id = "home" data-role = "page" class = "show activePage">
+            <h2>The Application</h2>
+            <p>This App is a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
+        </section>
 
-<!--Page # 2***********************************************************-->
-    <section id = "location" data-role = "page">
-        <p id = "waitMsg">Please wait while we load your current location!!</p>
-        <div id="output">
+    <!--Page # 2***********************************************************-->
+        <section id = "location" class = "hide" data-role = "page">
+            <p id = "waitMsg">Please wait while we load your current location!!</p>
+            <div id="output">
 
-       </div>
+           </div>
 
-<!--Page # 3***********************************************************-->
-    </section>
-    <section id = "contact"  data-role = "page">
-        <p>Please wait while we load your contact...</p>
-    </section>
+    <!--Page # 3***********************************************************-->
+        </section>
+        <section id = "contact" class = "hide"  data-role = "page">
+            <p>Please wait while we load your contact...</p>
+        </section>
+
+</div>
 
 <!--Footer*************************************************************-->
     <footer class = "footer">
