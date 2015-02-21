@@ -16,7 +16,6 @@ var app1_gere0018 = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
       app1_gere0018.navigate();
-        app1_gere0018.init();
 
     },
 
@@ -35,11 +34,6 @@ var app1_gere0018 = {
         window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
 	    app1_gere0018.loadPage(null);
     },
-    init: function(){
-        for(var p=0;p<pages.length; p++){
-            pages[p].addEventListener("click", app1_gere0018.doAnimation);
-        }
-    },
     //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
       ev.preventDefault();
@@ -54,66 +48,54 @@ var app1_gere0018 = {
     //handle the click event
     handleNav:function (ev){
         ev.preventDefault();
-        var href = ev.target.href;
+
+        var href = ev.currentTarget.href;
         var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
         //ask Steve what is return false for??????
       return false;
     },
-    doAnimation: function(ev){
-	var page = ev.currentTarget;
-	//clicked page needs to disappear and other page needs to appear
-	for(var p=0;p<pages.length; p++){
-		if(page == pages[p]){
-			//found the page to hide
-			//remove the class active to make it animate off the page
-			pages[p].className = "show";
-			//animation off the page is set to take 0.4 seconds
-			setTimeout(hidePage, 400, pages[p]);
-		}else{
-			//page needs to show
-			pages[p].className = "show";
-			//now add the class active to animate.
-			setTimeout(showPage, 10, pages[p]);
-		}
-	}
-},
 
- hidePage: function(pg){
-	pg.className = "hide";
-	//this class replaces show
-},
-
- showPage:function(pg){
-	pg.classList.add("active");
-},
     //Deal with history API and switching divs
     loadPage:function ( url ){
         if(url == null){
             //home page first call
-            //pages[0].style.display = 'block'; not needed already in html
+            pages[0].className = "activePage";
+            pages[0].classList.add("pt-page-moveFromBottomFade");
             history.replaceState(null, null, "#home");
         }else{
             //loop through pages
             for(var i=0; i < numPages; i++){
               if(pages[i].id == url){
-                pages[i].className = "activePage";
+                  pages[i].className = "activePage";
+                  pages[i].classList.add("pt-page-moveFromBottomFade");
                 history.pushState(null, null, "#" + url);
               }else{
-                pages[i].style.display = "none";
-              }
+                  var classes = pages[i].getAttribute("class");
+                  if (classes && (-1 !== classes.indexOf("activePage"))){
+                       pages[i].classList.remove("pt-page-moveFromBottomFade");
+                      pages[i].classList.add("pt-page-rotateFoldTop");
+                    setTimeout(function(pg){
+                       pg.classList.remove("activePage");
+                       pg.classList.remove("pt-page-rotateFoldTop");
+                        }, 700, pages[i]);
+
+                    }
+                }
+
+            }
+
             }
             //loop through links
             for(var t=0; t < numLinks; t++){
               links[t].className = "button";
 //location is a property of the window object that returns current location url of the document.
               if(links[t].href == window.location.href){
-                links[t].className += " activeTab";
+                links[t].classList.add("activeTab");
 
               }
             }
-        }
-    },
+        },
     //Need a listener for the popstate event to handle the back button
     browserBackButton:function (ev){
       url = window.location.hash;  //hash will include the "#" + the string after it.

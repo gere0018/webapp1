@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 400" enable-background="new 0 0 500 400" xml:space="preserve">
+<polygon id="main-wall" fill="#CCCCCC" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" points="413.6,342.4
+	185.4,394.7 191.3,193 420.2,155.4 "/>
+<polygon id="door" fill="#FCEE21" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" points="338.2,359.7 284.5,372
+	261.9,245.5 365.1,231.5 "/>
+<polygon id="side-wall" fill="#999999" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" points="185.4,394.7
+	126.7,372 126.7,186.8 191.3,193 "/>
+<polygon id="triangle" fill="#B3B3B3" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" points="291.6,62.2
+	420.2,155.4 191.3,199.1 "/>
+<linearGradient id="tile_1_" gradientUnits="userSpaceOnUse" x1="126.698" y1="118.0849" x2="291.6008" y2="118.0849">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<polygon id="tile" fill="url(#tile_1_)" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" points="291.6,62.2
+	234.1,37.2 126.7,188.4 191.1,199 "/>
+<rect id="door-nob" x="340.9" y="265.9" fill="#999999" stroke="#000000" stroke-width="1.8998" stroke-miterlimit="10" width="7.7" height="7.7"/>
+</svg>
