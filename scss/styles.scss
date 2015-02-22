@@ -63,18 +63,50 @@ P{
 
     }
     .button.activeTab{
-        color: #CCCCCC;
+        color: black;
         background-color: #FFF0B2;
         border: 0.2rem solid #CCCCCC;
     }
-}
-svg{
+    svg{
     width: 30px;
     height: 25px;
     padding-top: 5px;
 
-}
+    }
+    .activeTab #Home{
+            -webkit-transform: scale(1.3);
+            -moz-transform: scale(1.3);
+            -o-transform: scale(1.3);
+          transform: scale(1.3);
+        #door{
+            fill:black;
+        }
+        #triangle{
+            fill:black;
+        }
 
+    }
+    .activeTab #location-pin{
+        -webkit-transform: rotate(-25deg) scale(1.3);
+        -moz-transform: rotate(-25deg) scale(1.3);
+        -o-transform: rotate(-25deg) scale(1.3);
+        transform: rotate(-25deg) scale(1.3);
+        #arrow{
+            fill:black;
+        }
+    }
+    .activeTab #contact1{
+        -webkit-transform: scale(1.3);
+     -moz-transform: scale(1.3);
+       -o-transform: scale(1.3);
+          transform: scale(1.3);
+        #body{
+        fill:black;
+    }
+    }
+
+
+}
 
 //Page Layout***********************************************************
 .pageWrapper {
@@ -87,7 +119,6 @@ svg{
 }
 
 [data-role = "page"]{
-    background-color: #FFF0B2;
     color: #484848;
     padding: 1rem;
     //for page transition
@@ -123,11 +154,14 @@ svg{
     visibility: visible;
     z-index: 1;
 }
-.show{
-    display: block;
+#home{
+  background-color:   white;
 }
-.hide{
-    display: none;
+#location{
+    background-color:   #CCCCCC;
+}
+#contact{
+    background-color: #FFF0B2  ;
 }
 
 //Footer****************************************************************

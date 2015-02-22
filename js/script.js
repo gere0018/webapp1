@@ -33,6 +33,7 @@ var app1_gere0018 = {
             }
         window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
 	    app1_gere0018.loadPage(null);
+
     },
     //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
@@ -48,7 +49,6 @@ var app1_gere0018 = {
     //handle the click event
     handleNav:function (ev){
         ev.preventDefault();
-
         var href = ev.currentTarget.href;
         var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
@@ -69,6 +69,9 @@ var app1_gere0018 = {
               if(pages[i].id == url){
                   pages[i].className = "activePage";
                   pages[i].classList.add("pt-page-moveFromBottomFade");
+                  if(pages[i].id == "location"){
+                  app1_gere0018.setLocation();
+              }
                 history.pushState(null, null, "#" + url);
               }else{
                   var classes = pages[i].getAttribute("class");
@@ -88,12 +91,12 @@ var app1_gere0018 = {
             }
             //loop through links
             for(var t=0; t < numLinks; t++){
-              links[t].className = "button";
+              links[t].classList.remove("activeTab");
 //location is a property of the window object that returns current location url of the document.
               if(links[t].href == window.location.href){
                 links[t].classList.add("activeTab");
-
               }
+
             }
         },
     //Need a listener for the popstate event to handle the back button
@@ -104,12 +107,12 @@ var app1_gere0018 = {
           if(("#" + pages[i].id) == url){
             pages[i].className = "activePage";
           }else{
-            pages[i].style.display = "none";
+            pages[i].classList.remove("activePage");
           }
       }
       for(var t=0; t < numLinks; t++){
         links[t].classList.remove("activeTab");
-        if(links[t].href == location.href){
+        if(links[t].href == window.location.href){
           links[t].classList.add("activeTab");
         }
       }
@@ -136,28 +139,24 @@ var app1_gere0018 = {
         },
 
     drawImage:function(position){
-      var canvas = document.createElement("canvas");
-        canvas.height =400;
-        canvas.width = 400;
+      var canvas = document.querySelector("canvas");
       var context = canvas.getContext('2d');
-      var x = 0;
-      var y = 0;
-      var width = 400;
-      var height = 400;
       var imageObj = new Image();
      imageObj.onload = function() {
-        context.drawImage(imageObj, x, y, width, height);
+        context.drawImage(imageObj, 0, 0, canvas.width, canvas.height);
       };
      imageObj.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + position.coords.latitude + ","+ position.coords.longitude + "&zoom=14&size=400x400&markers=color:red%7C" + position.coords.latitude + ","+ position.coords.longitude + "&key=AIzaSyAOXUJlnbNxvV7HRtrslv_vFBT7tCJ4VZc";
 // append the canvas to the div with id output.
      var output = document.querySelector("#output");
-     var msg = document.createElement("p");
-     msg.innerHTML = "Your current location is: ";
-    output.appendChild(msg);
-    output.appendChild(canvas);
+     var msg = document.querySelector("#msg");
+     msg.innerHTML = "Your current location is: <br/>" +
+         "Latitude: " + position.coords.latitude + "&deg;<br/>" +
+         "Longitude: " + position.coords.longitude + "&deg;<br/>" ;
     //after loading the map image, remove the message asking the user to wait for loading.
     var waitMsg = document.querySelector("#waitMsg");
-     waitMsg.parentNode.removeChild(waitMsg);
+    if(waitMsg){
+        waitMsg.parentNode.removeChild(waitMsg);
+    }
 },
     gpsError:function ( error ){
       var errors = {
