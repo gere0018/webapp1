@@ -10,19 +10,6 @@ html {
   -ms-touch-action: manipulation;
   touch-action: manipulation; }
 
-body {
-  font-size: 5vmin;
-  /* set the starting size for the app */
-  left: 0;
-  overflow-x: hidden;
-  position: relative; }
-
-.cbp-spmenu-push-toleft {
-  left: -240px;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
-
 P {
   font-family: "Garamond", sans-serif;
   font-size: 1.4rem;
@@ -44,6 +31,18 @@ P {
 
 .clearfix {
   display: block; }
+
+body {
+  font-size: 5vmin;
+  left: 0;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
+.pushMenuToLeft {
+  left: -150px; }
 
 .appTitle {
   background-color: #FCEC5D;
@@ -67,22 +66,32 @@ P {
   width: 60px;
   height: 50px;
   float: right; }
+  #toggle-menu #X {
+    opacity: 0; }
+  #toggle-menu #line3 {
+    opacity: 1; }
   @media screen and (min-width: 600px) {
     #toggle-menu {
       display: none; } }
 
-.cbp-spmenu {
+#toggle-menu.x-toggle-menu #X {
+  opacity: 1; }
+#toggle-menu.x-toggle-menu #line3 {
+  opacity: 0; }
+
+.verticalMenu {
   position: fixed;
-  width: 200px;
-  right: -240px;
+  width: 150px;
+  height: 100%;
+  right: -150px;
   top: 4.5rem;
-  z-index: 1000;
+  z-index: 900;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   transition: all 0.3s ease; }
-  .cbp-spmenu a {
-    color: #484848;
-    background-color: #C8C5A8;
+  .verticalMenu a {
+    color: #444;
+    background-color: #7C7A68;
     display: block;
     height: 4rem;
     text-decoration: none;
@@ -90,14 +99,15 @@ P {
     font-size: 1.5rem;
     font-family: "Georgia", cursive; }
     @media screen and (min-width: 600px) {
-      .cbp-spmenu a {
+      .verticalMenu a {
         display: none; } }
-  .cbp-spmenu .activeTab {
-    background-color: #7C7A68; }
+  .verticalMenu .activeTab {
+    background-color: #FBF8D3; }
 
-.cbp-spmenu-open {
+.OpenverticalMenu {
   right: 0px;
-  background-color: #C8C5A8; }
+  background-color: #7C7A68;
+  opacity: 0.85; }
 
 .navBar {
   height: 3rem; }
@@ -205,7 +215,7 @@ svg {
   z-index: 1; }
 
 #output {
-  width: 33.33%;
+  width: 60%;
   margin: 0 auto; }
   @media screen and (max-width: 750px) {
     #output {
@@ -220,7 +230,8 @@ svg {
   position: fixed;
   width: 100%;
   bottom: 0;
-  height: 60px; }
+  height: 60px;
+  z-index: 1000; }
   .footer P {
     text-align: center;
     padding-top: 17px; }

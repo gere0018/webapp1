@@ -3,33 +3,32 @@ var app1_gere0018 = {
     numPages:0,
     links:[],
     numLinks:0,
+    toggleMenuIcon:"",
     initialize: function() {
         app1_gere0018.bindEvents();
     },
     bindEvents: function() {
-//      document.addEventListener('deviceready', app1_gere0018.onDeviceReady, false);
-        document.addEventListener("DOMContentLoaded", app1_gere0018.onDeviceReady, false);
+      document.addEventListener('deviceready', app1_gere0018.onDeviceReady, false);
+      document.addEventListener("DOMContentLoaded", app1_gere0018.onDeviceReady, false);
     },
     onDeviceReady: function() {
     app1_gere0018.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-      app1_gere0018.navigate();
-      var toggleMenu = document.querySelector("#toggle-menu");
-      toggleMenu.addEventListener("click", app1_gere0018.showMenu);
+      app1_gere0018.prepareNavigation();
+      toggleMenuIcon = document.querySelector("#toggle-menu");
+      toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
+        //change toggle menu icon to an x shape when clicked
     },
     showMenu:function(){
-        console.log("menu clicked");
-       var menu = document.querySelector(".cbp-spmenu");
-        document.body.classList.toggle("cbp-spmenu-push-toleft");
-        menu.classList.toggle("cbp-spmenu-open");
-
-
+        toggleMenuIcon.classList.toggle("x-toggle-menu");
+       var menu = document.querySelector(".verticalMenu");
+        document.body.classList.toggle("pushMenuToLeft");
+        menu.classList.toggle("OpenverticalMenu");
     },
-
-    navigate:function(){
+    prepareNavigation:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
 	   links = document.querySelectorAll(".button");
