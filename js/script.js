@@ -23,7 +23,9 @@ var app1_gere0018 = {
     showMenu:function(){
         console.log("menu clicked");
        var menu = document.querySelector(".cbp-spmenu");
+        document.body.classList.toggle("cbp-spmenu-push-toleft");
         menu.classList.toggle("cbp-spmenu-open");
+
 
     },
 

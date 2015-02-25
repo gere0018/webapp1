@@ -12,7 +12,16 @@ html {
 
 body {
   font-size: 5vmin;
-  /* set the starting size for the app */ }
+  /* set the starting size for the app */
+  left: 0;
+  overflow-x: hidden;
+  position: relative; }
+
+.cbp-spmenu-push-toleft {
+  left: -240px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
 
 P {
   font-family: "Garamond", sans-serif;
@@ -38,6 +47,7 @@ P {
 
 .appTitle {
   background-color: #FCEC5D;
+  box-sizing: border-box;
   padding: 0.5rem;
   width: 100%; }
   .appTitle h1 {
@@ -63,7 +73,6 @@ P {
 
 .cbp-spmenu {
   position: fixed;
-  visibility: hidden;
   width: 200px;
   right: -240px;
   top: 4.5rem;
@@ -88,7 +97,6 @@ P {
 
 .cbp-spmenu-open {
   right: 0px;
-  visibility: visible;
   background-color: #C8C5A8; }
 
 .navBar {
@@ -162,8 +170,10 @@ svg {
 
 [data-role="page"] {
   color: #444;
+  box-sizing: border-box;
   background-color: #FBF8D3;
   padding: 1rem;
+  padding-bottom: 60px;
   margin: 0rem;
   position: absolute;
   width: 100%;

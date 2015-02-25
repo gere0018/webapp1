@@ -16,8 +16,18 @@ html {
 }
 body{
 	font-size:5vmin;	/* set the starting size for the app */
-
+    //push menu
+    left:0;
+    overflow-x: hidden;
+	position: relative;
 }
+.cbp-spmenu-push-toleft{
+    //class applied to body topush menu to left
+    left: -240px;
+    -webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    }
 P{
     font-family: "Garamond", sans-serif;
     font-size:1.4rem;
@@ -39,6 +49,7 @@ P{
 
 .appTitle{
     background-color: $header;
+    box-sizing: border-box;
     padding: 0.5rem;
     width: 100%;
     h1{
@@ -68,7 +79,6 @@ P{
 //Navigation Bar*****************************************************
 .cbp-spmenu {
 	position: fixed;
-    visibility: hidden;
     width: 200px;
     right: -240px;
 	top: 4.5rem;
@@ -99,7 +109,6 @@ P{
 }
 .cbp-spmenu-open {
 	right: 0px;
-    visibility: visible;
     background-color: $navBar;
     }
 
@@ -193,8 +202,10 @@ svg{
 
 [data-role = "page"]{
     color: $text;
+    box-sizing: border-box;
     background-color: $page;
     padding: 1rem;
+    padding-bottom: 60px;
     margin: 0rem;
     //for page transition
     position:absolute;
