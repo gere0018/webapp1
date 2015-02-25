@@ -16,6 +16,14 @@ var app1_gere0018 = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
       app1_gere0018.navigate();
+      var toggleMenu = document.querySelector("#toggle-menu");
+      toggleMenu.addEventListener("click", app1_gere0018.showMenu);
+
+    },
+    showMenu:function(){
+        console.log("menu clicked");
+       var menu = document.querySelector(".cbp-spmenu");
+        menu.classList.toggle("cbp-spmenu-open");
 
     },
 
@@ -149,9 +157,9 @@ var app1_gere0018 = {
 // append the canvas to the div with id output.
      var output = document.querySelector("#output");
      var msg = document.querySelector("#msg");
-     msg.innerHTML = "Your current location is: <br/>" +
+     msg.innerHTML = "<strong>Your current location is:</strong><br/><br/>" +
          "Latitude: " + position.coords.latitude + "&deg;<br/>" +
-         "Longitude: " + position.coords.longitude + "&deg;<br/>" ;
+         "Longitude: " + position.coords.longitude + "&deg;<br/><br/>" ;
     //after loading the map image, remove the message asking the user to wait for loading.
     var waitMsg = document.querySelector("#waitMsg");
     if(waitMsg){
