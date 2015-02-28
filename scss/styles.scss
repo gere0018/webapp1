@@ -1,3 +1,8 @@
+//TODO: Fix vertical overflow for all pages.
+//FUTURE: Add hover state for tabs in small/wide screens.
+//TODO: Hide the vertical menu upon selecting tab.
+//TODO: Hide the body of vertical menu upon resizing the window.
+//FUTURE: Add active tab color for wide screen different from the color of the body.
 
 //Defaults*****************************************************************
 @import "variables";
@@ -20,7 +25,6 @@ P{
     font-size:1.4rem;
     color: $text;
 }
-
 .clearfix:after {
     visibility: hidden;
     display: block;
@@ -113,19 +117,22 @@ body{
 	-moz-transition: all 0.3s ease;
 	transition: all 0.3s ease;
     a {
-	color: $text;
-    background-color: $body;
-    display: block;
-    height: 4rem;
-    text-decoration: none;
-    text-align: center;
-    font-size: 1.5rem;
-    font-family: "Georgia", cursive;
-    @media screen and (min-width:600px){
-        display:none;
+        color: $text;
+        background-color: $body;
+        display: block;
+        height: 4rem;
+        text-decoration: none;
+        text-align: center;
+        font-size: 1.5rem;
+        font-family: "Georgia", cursive;
+        @media screen and (min-width:600px){
+            display:none;
+            }
     }
-
-    }
+    [href="#location"].button {
+             border-top: 1px solid $text;
+             border-bottom: 1px solid $text;
+        }
     .activeTab{
         background-color: $page;
 
@@ -143,19 +150,19 @@ body{
         list-style: none;
         overflow: hidden;
         margin: 0;
-        background-color: $page;
+        height: 100%;
         width: 100%;
     }
     li{
         float: left;
-        height:3rem;
+        height:100%;
         width: 33.33%;
     }
     .button{
         color: #484848;
         background-color: $navBar;
         display: block;
-        height: 2.5rem;
+        height: 100%;
         text-decoration: none;
         text-align: center;
         font-size: 1.5rem;
@@ -163,7 +170,13 @@ body{
         @media screen and (max-width:600px){
             display:none;
         }
+
     }
+    [href="#location"].button {
+             border-left: 1px solid $body;
+             border-right: 1px solid $body;
+        }
+
     .button.activeTab{
         background-color: $page;
     }
@@ -215,7 +228,7 @@ svg{
 .pageWrapper {
 	position: relative;
 	width: 100%;
-	height: 100%;
+	min-height: 81%;
 	-webkit-perspective: 1200px;
 	-moz-perspective: 1200px;
 	perspective: 1200px;
@@ -281,6 +294,7 @@ svg{
       position:fixed;
       width: 100%;
       bottom: 0;
+      margin-top: 500px;
       height: 60px;
       z-index: 1000;
 
