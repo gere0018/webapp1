@@ -1,4 +1,4 @@
-/*Animation****************************************************************************/
+/*Pages Transitions******************************************************/
 .pt-page-rotateFoldTop {
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
@@ -28,4 +28,4 @@
     -webkit-transform: translateY(100%);
     transform: translateY(100%); } }
 
-/*# sourceMappingURL=animation.css.map */
+/*# sourceMappingURL=page-transitions.css.map */

@@ -18,7 +18,10 @@ var app1_gere0018 = {
     receivedEvent: function(id) {
       app1_gere0018.prepareNavigation();
       toggleMenuIcon = document.querySelector("#toggle-menu");
-      toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
+        if(app1_gere0018.detectTouchSupport( )){
+            toggleMenuIcon.addEventListener("touchend", app1_gere0018.handleTouch);
+        }
+       toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
         //change toggle menu icon to an x shape when clicked
     },
@@ -91,10 +94,8 @@ var app1_gere0018 = {
                        pg.classList.remove("activePage");
                        pg.classList.remove("pt-page-rotateFoldTop");
                         }, 700, pages[i]);
-
                     }
                 }
-
             }
 
             }
@@ -133,6 +134,7 @@ var app1_gere0018 = {
       var touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
       return touchSupport;
     },
+    //to do: use Cordova Geolocation API to work within the phone.
     setLocation: function(){
         console.log("location called");
         if( navigator.geolocation ){
