@@ -134,7 +134,7 @@ var app1_gere0018 = {
       var touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
       return touchSupport;
     },
-    //to do: use Cordova Geolocation API to work within the phone.
+    //TODO: use Cordova Geolocation API to work within the phone.
     setLocation: function(){
         console.log("location called");
         if( navigator.geolocation ){
@@ -178,6 +178,7 @@ var app1_gere0018 = {
  //in case of erros the following function gives an explanation of type of error to the user.
       alert("Error: " + errors[error.code]);
     }
+    //TODO: use COrdova COntact API to handle the contacts page and load contacts.
 
 };
 app1_gere0018.initialize();
