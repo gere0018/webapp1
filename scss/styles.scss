@@ -70,7 +70,7 @@ body{
         color: #444;
         letter-spacing: 2px;
 
-       @media screen and (max-width:600px){
+       @media screen and (max-width:500px){
         display: inline;
         width: 80%;
         float: left;
@@ -90,7 +90,7 @@ body{
     #line3{
      opacity: 1;
     }
-    @media screen and (min-width:600px){
+    @media screen and (min-width:500px){
         display: none;
     }
 }
@@ -107,6 +107,7 @@ body{
 //Navigation Bar or menu *****************************************************
 // Vertical Toggle Menu styles
 .verticalMenu {
+    display: block;
 	position: fixed;
     width: 150px;
     height: 100%;
@@ -125,9 +126,7 @@ body{
         text-align: center;
         font-size: 1.5rem;
         font-family: "Georgia", cursive;
-        @media screen and (min-width:600px){
-            display:none;
-            }
+
     }
     [href="#location"].button {
              border-top: 1px solid $text;
@@ -137,14 +136,19 @@ body{
         background-color: $page;
 
     }
+    @media screen and (min-width:500px){
+            display:none;
+            }
 }
 .OpenverticalMenu {
 	right: 0px;
     background-color: $body;
     opacity: 0.85
     }
-//Main Naviguation bar or menu styles
+
+//Main Navigation bar or menu styles
 .navBar{
+    display: none;
     height:3rem;
     ul{
         list-style: none;
@@ -167,9 +171,6 @@ body{
         text-align: center;
         font-size: 1.5rem;
         font-family: "Georgia", cursive;
-        @media screen and (max-width:600px){
-            display:none;
-        }
 
     }
     [href="#location"].button {
@@ -181,8 +182,8 @@ body{
         background-color: $page;
     }
 
-    @media screen and (max-width:600px){
-        display: none;
+    @media screen and (min-width:500px){
+        display: block;
     }
 }
 //SVG used in both menus

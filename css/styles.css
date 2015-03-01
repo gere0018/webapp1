@@ -55,7 +55,7 @@ body {
     font-size: 1.7rem;
     color: #444;
     letter-spacing: 2px; }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 500px) {
       .appTitle h1 {
         display: inline;
         width: 80%;
@@ -70,7 +70,7 @@ body {
     opacity: 0; }
   #toggle-menu #line3 {
     opacity: 1; }
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 500px) {
     #toggle-menu {
       display: none; } }
 
@@ -80,6 +80,7 @@ body {
   opacity: 0; }
 
 .verticalMenu {
+  display: block;
   position: fixed;
   width: 150px;
   height: 100%;
@@ -98,14 +99,14 @@ body {
     text-align: center;
     font-size: 1.5rem;
     font-family: "Georgia", cursive; }
-    @media screen and (min-width: 600px) {
-      .verticalMenu a {
-        display: none; } }
   .verticalMenu [href="#location"].button {
     border-top: 1px solid #444;
     border-bottom: 1px solid #444; }
   .verticalMenu .activeTab {
     background-color: #FBF8D3; }
+  @media screen and (min-width: 500px) {
+    .verticalMenu {
+      display: none; } }
 
 .OpenverticalMenu {
   right: 0px;
@@ -113,6 +114,7 @@ body {
   opacity: 0.85; }
 
 .navBar {
+  display: none;
   height: 3rem; }
   .navBar ul {
     list-style: none;
@@ -133,17 +135,14 @@ body {
     text-align: center;
     font-size: 1.5rem;
     font-family: "Georgia", cursive; }
-    @media screen and (max-width: 600px) {
-      .navBar .button {
-        display: none; } }
   .navBar [href="#location"].button {
     border-left: 1px solid #7C7A68;
     border-right: 1px solid #7C7A68; }
   .navBar .button.activeTab {
     background-color: #FBF8D3; }
-  @media screen and (max-width: 600px) {
+  @media screen and (min-width: 500px) {
     .navBar {
-      display: none; } }
+      display: block; } }
 
 svg {
   width: 30px;
