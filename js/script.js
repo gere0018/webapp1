@@ -12,7 +12,7 @@ var app1_gere0018 = {
       document.addEventListener("DOMContentLoaded", app1_gere0018.onDeviceReady, false);
     },
     onDeviceReady: function() {
-    app1_gere0018.receivedEvent('deviceready');
+      app1_gere0018.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -23,35 +23,38 @@ var app1_gere0018 = {
         }
        toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
-        //change toggle menu icon to an x shape when clicked
+
     },
     showMenu:function(){
+        //change toggle menu icon to an x shape when clicked
         toggleMenuIcon.classList.toggle("x-toggle-menu");
-       var menu = document.querySelector(".verticalMenu");
+        var verticalMenu = document.querySelector(".verticalMenu");
+        //change class of body to allow the push transition.
         document.body.classList.toggle("pushMenuToLeft");
-        menu.classList.toggle("OpenverticalMenu");
+       verticalMenu.classList.toggle("OpenverticalMenu");
     },
     prepareNavigation:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
 	   links = document.querySelectorAll(".button");
 	   numLinks = links.length;
+        //looping through my links and adding touch and click events
 	   for(var i=0;i<numLinks; i++){
            if(app1_gere0018.detectTouchSupport( )){
-               //ask Steve how our shopping app worked without touch event??????
-            links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
+                links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
+            }else{
+           links[i].addEventListener("click", app1_gere0018.handleNav, false);
             }
-            links[i].addEventListener("click", app1_gere0018.handleNav, false);
-            }
-        window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
-	    app1_gere0018.loadPage(null);
-
+       }
+       window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
+        //loading the first page with url=null
+	   app1_gere0018.loadPage(null);
     },
     //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
-      ev.preventDefault();
+      ev.preventDefault();//prevent 300 ms delay
       ev.stopImmediatePropagation();
-      var touch = evt.changedTouches[0]; //this is the first object touched
+      var touch = ev.changedTouches[0]; //this is the first object touched
       var newEvt = document.createEvent("MouseEvent");
       //old method works across browsers, though it is deprecated.
       newEvt.initMouseEvent("click", true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY);
@@ -60,12 +63,11 @@ var app1_gere0018 = {
     },
     //handle the click event
     handleNav:function (ev){
-        ev.preventDefault();
+        ev.preventDefault();// preventing page reload
         var href = ev.currentTarget.href;
         var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
-        //ask Steve what is return false for??????
-      return false;
+        return false;
     },
 
     //Deal with history API and switching divs
