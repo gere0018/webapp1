@@ -55,7 +55,7 @@ body {
     font-size: 1.7rem;
     color: #444;
     letter-spacing: 2px; }
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 600px) {
       .appTitle h1 {
         display: inline;
         width: 80%;
@@ -70,7 +70,7 @@ body {
     opacity: 0; }
   #toggle-menu #line3 {
     opacity: 1; }
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: 600px) {
     #toggle-menu {
       display: none; } }
 
@@ -80,7 +80,6 @@ body {
   opacity: 0; }
 
 .verticalMenu {
-  display: block;
   position: fixed;
   width: 150px;
   height: 100%;
@@ -99,14 +98,11 @@ body {
     text-align: center;
     font-size: 1.5rem;
     font-family: "Georgia", cursive; }
-  .verticalMenu [href="#location"].button {
-    border-top: 1px solid #444;
-    border-bottom: 1px solid #444; }
+    @media screen and (min-width: 600px) {
+      .verticalMenu a {
+        display: none; } }
   .verticalMenu .activeTab {
     background-color: #FBF8D3; }
-  @media screen and (min-width: 500px) {
-    .verticalMenu {
-      display: none; } }
 
 .OpenverticalMenu {
   right: 0px;
@@ -114,35 +110,34 @@ body {
   opacity: 0.85; }
 
 .navBar {
-  display: none;
   height: 3rem; }
   .navBar ul {
     list-style: none;
     overflow: hidden;
     margin: 0;
-    height: 100%;
+    background-color: #FBF8D3;
     width: 100%; }
   .navBar li {
     float: left;
-    height: 100%;
+    height: 3rem;
     width: 33.33%; }
   .navBar .button {
     color: #484848;
     background-color: #C8C5A8;
     display: block;
-    height: 100%;
+    height: 2.5rem;
     text-decoration: none;
     text-align: center;
     font-size: 1.5rem;
     font-family: "Georgia", cursive; }
-  .navBar [href="#location"].button {
-    border-left: 1px solid #7C7A68;
-    border-right: 1px solid #7C7A68; }
+    @media screen and (max-width: 600px) {
+      .navBar .button {
+        display: none; } }
   .navBar .button.activeTab {
     background-color: #FBF8D3; }
-  @media screen and (min-width: 500px) {
+  @media screen and (max-width: 600px) {
     .navBar {
-      display: block; } }
+      display: none; } }
 
 svg {
   width: 30px;
@@ -178,7 +173,7 @@ svg {
 .pageWrapper {
   position: relative;
   width: 100%;
-  min-height: 81%;
+  height: 100%;
   -webkit-perspective: 1200px;
   -moz-perspective: 1200px;
   perspective: 1200px; }
@@ -235,7 +230,6 @@ svg {
   position: fixed;
   width: 100%;
   bottom: 0;
-  margin-top: 500px;
   height: 60px;
   z-index: 1000; }
   .footer P {

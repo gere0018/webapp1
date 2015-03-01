@@ -18,16 +18,16 @@ var app1_gere0018 = {
     receivedEvent: function(id) {
       app1_gere0018.prepareNavigation();
       toggleMenuIcon = document.querySelector("#toggle-menu");
-        var hammertime = new Hammer(toggleMenuIcon);
-            hammertime.on('tap', function(ev) {
-               app1_gere0018.showMenu();
-            });
+        if(app1_gere0018.detectTouchSupport( )){
+            toggleMenuIcon.addEventListener("touchend", app1_gere0018.handleTouch);
+        }
+       toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
+        //change toggle menu icon to an x shape when clicked
     },
     showMenu:function(){
-        //change toggle menu icon to an x shape when clicked
         toggleMenuIcon.classList.toggle("x-toggle-menu");
-        var menu = document.querySelector(".verticalMenu");
+       var menu = document.querySelector(".verticalMenu");
         document.body.classList.toggle("pushMenuToLeft");
         menu.classList.toggle("OpenverticalMenu");
     },
@@ -37,16 +37,31 @@ var app1_gere0018 = {
 	   links = document.querySelectorAll(".button");
 	   numLinks = links.length;
 	   for(var i=0;i<numLinks; i++){
-            var hammertime = new Hammer(links[i]);
-            hammertime.on('tap', app1_gere0018.handleNav);
-        }
-       window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
-	   app1_gere0018.loadPage(null);
+           if(app1_gere0018.detectTouchSupport( )){
+               //ask Steve how our shopping app worked without touch event??????
+            links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
+            }
+            links[i].addEventListener("click", app1_gere0018.handleNav, false);
+            }
+        window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
+	    app1_gere0018.loadPage(null);
+
+    },
+    //Transform the touch event into a mouse event "click":
+    handleTouch:function (ev){
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      var touch = evt.changedTouches[0]; //this is the first object touched
+      var newEvt = document.createEvent("MouseEvent");
+      //old method works across browsers, though it is deprecated.
+      newEvt.initMouseEvent("click", true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY);
+      ev.currentTarget.dispatchEvent(newEvt);
+      //send the touch to the click handler
     },
     //handle the click event
     handleNav:function (ev){
         ev.preventDefault();
-        var href = this.target.href;
+        var href = ev.currentTarget.href;
         var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
         //ask Steve what is return false for??????
@@ -167,15 +182,4 @@ var app1_gere0018 = {
 
 };
 app1_gere0018.initialize();
-
-
-
-
-
-
-
-
-
-
-
 
