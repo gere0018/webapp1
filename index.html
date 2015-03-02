@@ -1,3 +1,8 @@
+<!--
+TODO:Change application name and content.
+TODO:canvas size should be in percentage or rem to be responsive.
+-->
+
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -152,25 +157,31 @@ Home</a></li>
         </ul>
     </nav>
     <div class = "pageWrapper">
-    <!--Page # 1***********************************************************-->
+    <!--Page # 1 Home ***********************************************************-->
         <section id = "home" data-role = "page" >
             <h2>The Application</h2>
-            <p>This App is a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
+            <p>This application will send a message to your emergency contact.This App is a web app designed from scratch using only html5 css and javaScript without the help of any framework like bootstrap or libraries like JQuery or JQuery mobile. It's an opportunity to review all the concepts studed so far and to practice single page applications in html. Most importantly the Cordova phone gap is used again to allow us to make the app fucntional on Android.</p>
         </section>
 
-    <!--Page # 2***********************************************************-->
+    <!--Page # 2 Location ***********************************************************-->
         <section id = "location" data-role = "page">
                 <div id="output">
-                    <p id = "waitMsg">Please wait while we load your location!!</p>
+                    <p id = "waitMsg">Please wait while we Identify your location!!</p>
                     <p id = "msg"></p>
                     <canvas height="400px" width="400px">
                     </canvas>
 
             </div>
-    <!--Page # 3***********************************************************-->
+    <!--Page # 3 Contact ***********************************************************-->
         </section>
         <section id = "contact"  data-role = "page">
-            <p>Please wait while we load your contact...</p>
+            <div id = "contactsOutput">
+                <h2>Emergency Contact</h2>
+                <p>This service works only on mobile devices. Please Select your emergency contact by clicking the button below!!</p>
+                <button id = "selectBtn">Select Contact</button>
+            </div>
+
+
         </section>
 
 </div>
@@ -180,6 +191,7 @@ Home</a></li>
         <p>&copy; Nehmat Gereige 2015</p>
     </footer>
 <!--Script*************************************************************-->
+    <script type="text/javascript" src="cordova.js"></script>
     <script src="js/script.js"></script>
 
 </body>

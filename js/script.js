@@ -1,3 +1,5 @@
+//TODO: make vertical menu disappear when we select a tab.
+
 var app1_gere0018 = {
     page:[],
     numPages:0,
@@ -20,7 +22,7 @@ var app1_gere0018 = {
       toggleMenuIcon = document.querySelector("#toggle-menu");
         if(app1_gere0018.detectTouchSupport( )){
             toggleMenuIcon.addEventListener("touchend", app1_gere0018.handleTouch);
-        }
+         }
        toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
 
@@ -42,9 +44,10 @@ var app1_gere0018 = {
 	   for(var i=0;i<numLinks; i++){
            if(app1_gere0018.detectTouchSupport( )){
                 links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
-            }else{
-           links[i].addEventListener("click", app1_gere0018.handleNav, false);
             }
+      //must register event listener on click event even if touch is supported.handletouch will transform touch into a click, but we still need to attach event listener to it with line below.
+           links[i].addEventListener("click", app1_gere0018.handleNav, false);
+
        }
        window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
         //loading the first page with url=null
@@ -85,7 +88,13 @@ var app1_gere0018 = {
                   pages[i].classList.add("pt-page-moveFromBottomFade");
                   if(pages[i].id == "location"){
                   app1_gere0018.setLocation();
-              }
+                  }
+                  if(pages[i].id == "contact"){
+                    if(navigator.contacts){
+                        app1_gere0018.launchContactPicker();
+                    }
+
+                  }
                 history.pushState(null, null, "#" + url);
               }else{
                   var classes = pages[i].getAttribute("class");
@@ -136,17 +145,18 @@ var app1_gere0018 = {
       var touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
       return touchSupport;
     },
-    //TODO: use Cordova Geolocation API to work within the phone.
+    //Using Cordova Geolocation API to get current Location.
     setLocation: function(){
         console.log("location called");
         if( navigator.geolocation ){
         var getLocation = {enableHighAccuracy: false, timeout:60000, maximumAge:60000};
-        navigator.geolocation.getCurrentPosition( app1_gere0018.reportPosition, app1_gere0018.gpsError, app1_gere0018.getLocation);
+        navigator.geolocation.getCurrentPosition( app1_gere0018.reportPosition, app1_gere0018.gpsError, getLocation);
         //If it doesn't alert the user with the following message.
         }else{
             alert("OOPS!! your browser needs to be updated and currently does not support location based services.")
         }
     },
+    //success function
     reportPosition:function( position ){
          app1_gere0018.drawImage(position);
         },
@@ -162,7 +172,7 @@ var app1_gere0018 = {
 // append the canvas to the div with id output.
      var output = document.querySelector("#output");
      var msg = document.querySelector("#msg");
-     msg.innerHTML = "<strong>Your current location is:</strong><br/><br/>" +
+     msg.innerHTML = "<strong>Your current location is:</strong><br/>" +
          "Latitude: " + position.coords.latitude + "&deg;<br/>" +
          "Longitude: " + position.coords.longitude + "&deg;<br/><br/>" ;
     //after loading the map image, remove the message asking the user to wait for loading.
@@ -179,9 +189,45 @@ var app1_gere0018 = {
       };
  //in case of erros the following function gives an explanation of type of error to the user.
       alert("Error: " + errors[error.code]);
+    },
+    launchContactPicker: function (){
+        var selectBtn = document.querySelector("#selectBtn");
+        if(app1_gere0018.detectTouchSupport( )){
+            selectBtn.addEventListener("touchend", app1_gere0018.handleTouch);
+         }
+        selectBtn.addEventListener("click", function (){
+             navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
+            });
+    },
+
+    selectContact: function ( pickedContact ){
+          var contactsOutput = document.querySelector("#contactsOutput");
+          contactsOutput.innerHTML = "<h4>Your Emergency Contact's info: </h4></br>" +
+                                      "<p>Name: " +  pickedContact.displayName + "<p></br>";
+        // Display Contact's Phone number ******************************************
+        var contactNumber;
+          if(pickedContact.phoneNumbers== null){
+              contactNumber= "This contact has no saved number";
+          }else{
+              contactNumber= pickedContact.phoneNumbers[0].value;
+          }
+         contactsOutput.innerHTML += "<p>Phone number: " + contactNumber  + "<p></br>";
+
+        // Display Contact's address ***********************************************
+        var contactAddress;
+         if(pickedContact.addresses== null) {
+            contactAddress = "This contact has no saved address";
+         }else{
+           contactAddress = pickedContact.addresses[0].formatted;
+         }
+
+         contactsOutput.innerHTML += "<p>Address: " +  contactAddress + "<p></br>";
+
+    },
+    errfunc:function (){
+        alert("sorry !! we are not able to load your contact right now!!")
+
     }
-    //TODO: use COrdova COntact API to handle the contacts page and load contacts.
 
 };
 app1_gere0018.initialize();
-

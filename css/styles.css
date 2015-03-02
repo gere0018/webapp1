@@ -172,6 +172,7 @@ svg {
     fill: black; }
 
 .pageWrapper {
+  outline: 2px solid blue;
   position: relative;
   width: 100%;
   height: 100%;
@@ -192,7 +193,6 @@ svg {
   top: 0;
   left: 0;
   visibility: hidden;
-  overflow: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
@@ -216,16 +216,36 @@ svg {
   z-index: 1; }
 
 #output {
-  width: 60%;
-  margin: 0 auto; }
-  @media screen and (max-width: 750px) {
+  width: 95%;
+  height: 95%;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  text-align: center; }
+  @media screen and (min-width: 900px) {
     #output {
-      margin: 2rem; } }
-  @media screen and (max-width: 450px) {
-    #output {
-      margin: 0; } }
+      width: 60%;
+      margin-left: 20%; } }
+
+#contactsOutput {
+  margin: 0 auto;
+  width: 95%;
+  font-family: "Garamond", sans-serif;
+  text-align: center;
+  font-size: 1.4rem;
+  color: #444; }
+
+#selectBtn {
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 25px;
+  font-family: "Garamond", sans-serif;
+  font-size: 1.4rem;
+  color: #FCEC5D;
+  background-color: #7C7A68; }
 
 .footer {
+  outline: 2px solid red;
   background-color: #FCEC5D;
   margin: 0rem;
   position: fixed;
