@@ -1,11 +1,10 @@
-//TODO: make vertical menu disappear when we select a tab.
-
 var app1_gere0018 = {
     page:[],
     numPages:0,
     links:[],
     numLinks:0,
     toggleMenuIcon:"",
+    verticalMenu: "",
     initialize: function() {
         app1_gere0018.bindEvents();
     },
@@ -30,7 +29,7 @@ var app1_gere0018 = {
     showMenu:function(){
         //change toggle menu icon to an x shape when clicked
         toggleMenuIcon.classList.toggle("x-toggle-menu");
-        var verticalMenu = document.querySelector(".verticalMenu");
+        verticalMenu = document.querySelector(".verticalMenu");
         //change class of body to allow the push transition.
         document.body.classList.toggle("pushMenuToLeft");
        verticalMenu.classList.toggle("OpenverticalMenu");
@@ -86,6 +85,8 @@ var app1_gere0018 = {
               if(pages[i].id == url){
                   pages[i].className = "activePage";
                   pages[i].classList.add("pt-page-moveFromBottomFade");
+                  verticalMenu.classList.toggle("OpenverticalMenu");
+                  document.body.classList.toggle("pushMenuToLeft");
                   if(pages[i].id == "location"){
                   app1_gere0018.setLocation();
                   }
