@@ -85,8 +85,11 @@ var app1_gere0018 = {
               if(pages[i].id == url){
                   pages[i].className = "activePage";
                   pages[i].classList.add("pt-page-moveFromBottomFade");
-                  verticalMenu.classList.toggle("OpenverticalMenu");
-                  document.body.classList.toggle("pushMenuToLeft");
+                  //making vertical menu disapper when we select a tab.
+                  verticalMenu = document.querySelector(".verticalMenu");
+                  verticalMenu.classList.remove("OpenverticalMenu");                             document.body.classList.toggle("pushMenuToLeft");
+                  toggleMenuIcon.classList.toggle("x-toggle-menu");
+
                   if(pages[i].id == "location"){
                   app1_gere0018.setLocation();
                   }
