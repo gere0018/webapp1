@@ -35,7 +35,6 @@ P {
 body {
   font-size: 5vmin;
   left: 0;
-  overflow-x: hidden;
   position: relative;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -120,7 +119,6 @@ body {
   height: 3rem; }
   .navBar ul {
     list-style: none;
-    overflow: hidden;
     margin: 0;
     background-color: #FBF8D3;
     width: 100%; }
@@ -180,7 +178,7 @@ svg {
 .pageWrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 88%;
   -webkit-perspective: 1200px;
   -moz-perspective: 1200px;
   perspective: 1200px; }
@@ -210,7 +208,6 @@ svg {
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d; }
   [data-role="page"] h2 {
-    text-align: center;
     font-weight: 150;
     padding: 0.5rem;
     font-size: 1.5rem;
@@ -225,8 +222,7 @@ svg {
   height: 95%;
   margin: 0 auto;
   overflow-x: auto;
-  overflow-y: auto;
-  text-align: center; }
+  overflow-y: auto; }
   @media screen and (min-width: 900px) {
     #output {
       width: 60%;
@@ -236,7 +232,6 @@ svg {
   margin: 0 auto;
   width: 95%;
   font-family: "Garamond", sans-serif;
-  text-align: center;
   font-size: 1.4rem;
   color: #444; }
 

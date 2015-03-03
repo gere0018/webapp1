@@ -202,6 +202,7 @@ var app1_gere0018 = {
             selectBtn.addEventListener("touchend", app1_gere0018.handleTouch);
          }
         selectBtn.addEventListener("click", function (){
+            console.log("Selection button is clicked.");
              navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
             });
     },
@@ -230,7 +231,7 @@ var app1_gere0018 = {
          contactsOutput.innerHTML += "<p>Address: " +  contactAddress + "<p></br>";
 
     },
-    errfunc:function (){
+    errFunc:function (){
         alert("sorry !! we are not able to load your contact right now!!")
 
     }
