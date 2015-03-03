@@ -145,8 +145,11 @@ body{
 .OpenverticalMenu {
 	right: 0;
     background-color: $body;
-    opacity: 0.85
+    opacity: 0.85;
+    @media screen and (min-width:650px){
+        display: none;
     }
+}
 
 //Main Naviguation bar/menu styles **************************************************
 

@@ -117,6 +117,9 @@ body {
   right: 0;
   background-color: #7C7A68;
   opacity: 0.85; }
+  @media screen and (min-width: 650px) {
+    .OpenverticalMenu {
+      display: none; } }
 
 .navBar {
   display: none;
