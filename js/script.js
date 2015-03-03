@@ -5,6 +5,7 @@ var app1_gere0018 = {
     numLinks:0,
     toggleMenuIcon:"",
     verticalMenu: "",
+    selectBtn:"",
     initialize: function() {
         app1_gere0018.bindEvents();
     },
@@ -18,12 +19,12 @@ var app1_gere0018 = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
       app1_gere0018.prepareNavigation();
+        //Add touch and click listener to toggleMenuIcon.
       toggleMenuIcon = document.querySelector("#toggle-menu");
         if(app1_gere0018.detectTouchSupport( )){
             toggleMenuIcon.addEventListener("touchend", app1_gere0018.handleTouch);
          }
        toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
-
 
     },
     showMenu:function(){
@@ -32,7 +33,7 @@ var app1_gere0018 = {
         verticalMenu = document.querySelector(".verticalMenu");
         //change class of body to allow the push transition.
         document.body.classList.toggle("pushMenuToLeft");
-       verticalMenu.classList.toggle("OpenverticalMenu");
+        verticalMenu.classList.toggle("OpenverticalMenu");
     },
     prepareNavigation:function(){
        pages = document.querySelectorAll('[data-role="page"]');
@@ -44,10 +45,10 @@ var app1_gere0018 = {
            if(app1_gere0018.detectTouchSupport( )){
                 links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
             }
-      //must register event listener on click event even if touch is supported.handletouch will transform touch into a click, but we still need to attach event listener to it with line below.
+           //Must add event listener on click even if touch is supported.handletouch will transform touch into a click, but we still need to attach event listener to the click with line below.
            links[i].addEventListener("click", app1_gere0018.handleNav, false);
-
        }
+        //For browser's back button, add a click listener
        window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
         //loading the first page with url=null
 	   app1_gere0018.loadPage(null);
@@ -65,21 +66,24 @@ var app1_gere0018 = {
     },
     //handle the click event
     handleNav:function (ev){
-        ev.preventDefault();// preventing page reload
+        // prevent page reload
+        ev.preventDefault();
+        //wether svg text or a button is clicked,current target registers the click for the main element which is (.button).
         var href = ev.currentTarget.href;
-        var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
+        //Split returns an array with 2 strings, the string before # and the string after the #.
+        var parts = href.split("#");
         app1_gere0018.loadPage( parts[1] );
         return false;
     },
 
-    //Deal with history API and switching divs
+    //Deal with switching pages and history Api
     loadPage:function ( url ){
         if(url == null){
             //home page first call
             pages[0].className = "activePage";
             history.replaceState(null, null, "#home");
         }else{
-            //loop through pages
+            //loop through pages and toggle transitions and active page class
             for(var i=0; i < numPages; i++){
               if(pages[i].id == url){
                   pages[i].className = "activePage";
@@ -102,14 +106,14 @@ var app1_gere0018 = {
                   var classes = pages[i].getAttribute("class");
                   if (classes && (-1 !== classes.indexOf("activePage"))){
                        pages[i].classList.remove("pt-page-moveFromBottomFade");
-                      pages[i].classList.add("pt-page-rotateFoldTop");
+                       pages[i].classList.add("pt-page-rotateFoldTop");
                     setTimeout(function(pg){
                        pg.classList.remove("activePage");
                        pg.classList.remove("pt-page-rotateFoldTop");
                         }, 700, pages[i]);
                     }
                 }
-            }
+             }
 
             }
             //loop through links
@@ -193,18 +197,23 @@ var app1_gere0018 = {
       alert("Error: " + errors[error.code]);
     },
     launchContactPicker: function (){
-        var selectBtn = document.querySelector("#selectBtn");
+        selectBtn = document.querySelector("#selectBtn");
         if(app1_gere0018.detectTouchSupport( )){
             selectBtn.addEventListener("touchend", app1_gere0018.handleTouch);
          }
         selectBtn.addEventListener("click", function (){
             console.log("Selection button is clicked.");
-             navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
-            selectBtn.innerHTML = "Change contact";
+            if(navigator.contacts){
+                navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
+            }else{
+                alert("Sorry, you can select your contact only on a mobile device");
+            }
+
             });
     },
 
     selectContact: function ( pickedContact ){
+         selectBtn.innerHTML = "Change contact";
           var contactsOutput = document.querySelector("#contactsOutput");
           contactsOutput.innerHTML = "<h4>Your Emergency Contact's info: </h4></br>" +
                                       "<p>Name: " +  pickedContact.displayName + "<p></br>";
@@ -216,6 +225,7 @@ var app1_gere0018 = {
               contactNumber= pickedContact.phoneNumbers[0].value;
           }
          contactsOutput.innerHTML += "<p>Phone number: " + contactNumber  + "<p></br>";
+
 
         // Display Contact's address ***********************************************
         var contactAddress;
