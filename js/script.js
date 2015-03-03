@@ -77,7 +77,6 @@ var app1_gere0018 = {
         if(url == null){
             //home page first call
             pages[0].className = "activePage";
-            pages[0].classList.add("pt-page-moveFromBottomFade");
             history.replaceState(null, null, "#home");
         }else{
             //loop through pages
@@ -96,10 +95,7 @@ var app1_gere0018 = {
                   app1_gere0018.setLocation();
                   }
                   if(pages[i].id == "contact"){
-                    if(navigator.contacts){
                         app1_gere0018.launchContactPicker();
-                    }
-
                   }
                 history.pushState(null, null, "#" + url);
               }else{
@@ -204,6 +200,7 @@ var app1_gere0018 = {
         selectBtn.addEventListener("click", function (){
             console.log("Selection button is clicked.");
              navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
+            selectBtn.innerHTML = "Change contact";
             });
     },
 

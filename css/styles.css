@@ -222,7 +222,8 @@ svg {
   height: 95%;
   margin: 0 auto;
   overflow-x: auto;
-  overflow-y: auto; }
+  overflow-y: auto;
+  text-align: center; }
   @media screen and (min-width: 900px) {
     #output {
       width: 60%;

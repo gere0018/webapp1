@@ -278,6 +278,8 @@ svg{
     margin: 0 auto;
     overflow-x: auto;
     overflow-y: auto;
+    //text align center is centering the canvas which is strange
+    text-align: center;
     @media screen and (min-width: 900px){
         width: 60%;
         margin-left: 20%;
