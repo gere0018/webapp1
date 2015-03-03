@@ -85,9 +85,10 @@ var app1_gere0018 = {
         }else{
             //loop through pages and toggle transitions and active page class
             for(var i=0; i < numPages; i++){
-              if(pages[i].id == url){
-                  pages[i].className = "activePage";
-                  pages[i].classList.add("pt-page-moveFromBottomFade");
+              //In page transition *******************************************
+                if(pages[i].id == url){
+                     pages[i].className = "activePage";
+                     pages[i].classList.add("pt-page-moveFromTopFade");
                   //making vertical menu disapper when we select a tab.
                   verticalMenu = document.querySelector("#verticalMenu");
                   if(verticalMenu.className == "verticalMenu OpenverticalMenu"){
@@ -103,14 +104,15 @@ var app1_gere0018 = {
                   }
                 history.pushState(null, null, "#" + url);
               }else{
+                  //Out pages
                   var classes = pages[i].getAttribute("class");
                   if (classes && (-1 !== classes.indexOf("activePage"))){
-                       pages[i].classList.remove("pt-page-moveFromBottomFade");
-                       pages[i].classList.add("pt-page-rotateFoldTop");
+                       pages[i].classList.remove("pt-page-moveFromTopFade");
+                       pages[i].classList.add("pt-page-rotateFoldBottom");
                     setTimeout(function(pg){
                        pg.classList.remove("activePage");
-                       pg.classList.remove("pt-page-rotateFoldTop");
-                        }, 700, pages[i]);
+                       pg.classList.remove("pt-page-rotateFoldBottom");
+                        }, 300, pages[i]);
                     }
                 }
              }
