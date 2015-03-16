@@ -1,105 +1,339 @@
 //Defaults*****************************************************************
-
+@import "variables";
 *{
     margin: 0;
     padding: 0;
 }
 html, body{
-    background-color: #FFF0B2;
-    overflow: auto;
+    background-color: $body;
+    height: 100%;
 }
 html {
     -ms-touch-action: manipulation;
     touch-action: manipulation;
 }
-body{
-	font-size:5vmin;	/* set the starting size for the app */
-}
 P{
     font-family: "Garamond", sans-serif;
-    font-size:1.4rem;
+     font-size: 1.2rem;
+    color: $text;
 }
-//Header*******************************************************************
 
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+    }
+.clearfix { display: inline-table; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
+//Body *******************************************************************
+//FUTURE: play with colors and possibly add more fonts and title animation
+body{
+    // set the starting size for the app
+	font-size:5vmin;
+	position: relative;
+
+}
+
+// Vertical Navigation styles **********************************************
+.verticalMenu {
+	position: fixed;
+    width: 175px;
+    height: 100%;
+    right: -175px;
+	top: 0;
+	z-index: 900;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+    padding-top: 4rem;
+    a {
+	color: $text;
+    background-color: $body;
+    display: block;
+    height: 4rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: "Georgia", cursive;
+    }
+    [href="#location"]{
+        border-bottom: 1px solid $text;
+        border-top: 1px solid $text;
+    }
+    .activeTab{
+        background-color: $page;
+    }
+    //disappears on devices with more than 500px width
+    @media screen and (min-width:500px){
+        display:none;
+    }
+}
+.OpenverticalMenu {
+	right: 0px;
+    background-color: $body;
+    }
+
+
+
+//Page Layout***********************************************************
+//Required properties for page transitions
+#pageWrapper{
+	position: relative;
+    left: 0;
+	width: 100%;
+	height: 100%;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+#pageWrapper.pageWrapperPushedLeft{
+        left: -175px;
+        footer{
+            left: -175px;
+        }
+       .appTitle{
+           left: -175px;
+        }
+        @media screen and (min-width:500px){
+        left:0;
+            footer{
+            left: 0;
+        }
+       .appTitle{
+           left: 0;
+        }
+
+        }
+    }
+
+//Header*******************************************************************
 .appTitle{
-    background-color: #CCCCCC;
-    margin: 0.2rem;
-    padding: 0.5rem;
+    position: fixed;
+    background-color: $header;
+    width: 100%;
+    left: 0;
+    top:0;
+    height: 3.5rem;
+    z-index: 2;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
     h1{
+        box-sizing: border-box;
+        padding: 0.5rem;
         text-align: center;
         font-family: "Georgia", cursive;
-        font-size: 1.7rem;
-        color: #484848;
+        font-size: 1.5rem;
+        color: #444;
         letter-spacing: 2px;
+        display: inline;
+        width: 80%;
+        float: left;
+        @media screen and (min-width:500px){
+             width: 100%;
+        }
+
+       }
+
+}
+//SVG toggle menu icon
+#toggle-menu{
+    display: inline;
+    padding: 0;
+    width: 60px;
+    height: 50px;
+    float: right;
+    #X{
+    opacity: 0;
+    }
+    #line3{
+     opacity: 1;
+    }
+    //toggle menu disappears on devices with more than 500px width
+    @media screen and (min-width:500px){
+        display: none;
+    }
+}
+#toggle-menu.x-toggle-menu{
+    #X{
+      opacity: 1;
+    }
+    #line3{
+     opacity: 0;
     }
 
 }
 
-
-//Navigation Bar***********************************************************
-
+//Main Naviguation bar/menu styles **************************************************
 .navBar{
+    position: fixed;
+    width: 100%;
+    top: 3.5rem;
+    display: none;
     height:3rem;
+    z-index: 2;
+
     ul{
         list-style: none;
-        overflow: hidden;
-        margin: 0 0.2rem;
-
+        margin: 0;
+        background-color: $page;
+        width: 100%;
     }
     li{
         float: left;
         height:3rem;
         width: 33.33%;
-
     }
     .button{
         color: #484848;
-        background-color: #CCCCCC;
-        border: 0.2rem solid #484848;
+        background-color: $navBar;
         display: block;
-        height: 2.5rem;
-        text-align: center;
+        height: 3rem;
         text-decoration: none;
+        text-align: center;
         font-size: 1.5rem;
         font-family: "Georgia", cursive;
-
+    }
+    [href="#location"]{
+        border-left: 1px solid $text;
+        border-right: 1px solid $text;
     }
     .button.activeTab{
-        color: #CCCCCC;
-        background-color: #FFF0B2;
-        border: 0.2rem solid #CCCCCC;
+        background-color: $page;
+    }
+//navBar appears as soon as vertical menu and togglemenu svg disappear.
+    @media screen and (min-width:500px){
+        display: block;
     }
 }
+//SVG used in both menus
+svg{
+    width: 30px;
+    height: 25px;
+    padding-top: 5px;
 
-//Page Layout***********************************************************
+    }
+.activeTab #Home{
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+            #door{
+                fill:black;
+            }
+            #triangle{
+                fill:black;
+            }
+    }
+.activeTab #location-pin{
+            -webkit-transform: rotate(-25deg) scale(1.1);
+            -moz-transform: rotate(-25deg) scale(1.1);
+            -o-transform: rotate(-25deg) scale(1.1);
+            transform: rotate(-25deg) scale(1.1);
+            #arrow{
+                fill:black;
+            }
+    }
+.activeTab #contact1{
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+              transform: scale(1.1);
+            #body{
+            fill:black;
+            }
+    }
+
+//All Pages
 [data-role = "page"]{
-    background-color: #FFF0B2;
-    color: #484848;
+    color: $text;
+    background-color: $page;
     padding: 1rem;
-    display: none;
+    margin: 0rem;
+    //for page transition
+    position:absolute;
+    width:100%;
+	height: 100%;
+    top: 3.5rem;
+	left: 0;
+	visibility: hidden;
+    -webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -ms-backface-visibility: hidden;
+   backface-visibility: hidden;
+   -webkit-transform: translate3d(0, 0, 0);
+   -moz-transform: translate3d(0, 0, 0);
+   -ms-transform: translate3d(0, 0, 0);
+   transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+    @media screen and (min-width:500px){
+        top: 6.5rem;
+        padding-bottom: 5rem;
+        canvas{
+            padding-bottom: 4rem;
+        }
+    }
+
+    .container{
+        width: 90%;
+    }
+
     h2{
-        text-align: center;
-        font-weight: 150;
-        padding: 0.5rem;
+        padding-bottom: 0.5rem;
         font-size: 1.5rem;
         font-family: "Garamond", sans-serif;
     }
+}
+//Active pages
+[data-role = "page"].activePage{
+    visibility: visible;
+    z-index: 1;
+}
+//Location Page*********************************************
 
+//Contacts Page*********************************************
+#contactsOutput{
+    margin: 0 auto;
+    width: 95%;
+    font-family: "Garamond", sans-serif;
+    font-size:1.4rem;
+    color: $text;
 
 }
-[data-role = "page"].activePage{
-        display: block;
-    }
-
+#selectBtn{
+    padding: 0.5rem;
+    margin-top: 1rem;
+    border-radius: 25px;
+    font-family: "Garamond", sans-serif;
+    font-size:1.4rem;
+    color: $header;
+    background-color: $body;
+            }
 
 //Footer****************************************************************
 
 .footer{
-    background-color: #CCCCCC;
-    margin: 0.2rem;
-    margin-top: 60%;
-    padding: 0.5rem;
+      background-color: $header;
+      margin: 0rem;
+      position:fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      height: 3rem;
+      z-index: 1000;
+     -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+
     P{
         text-align: center;
+        padding-top: 17px;
     }
 }

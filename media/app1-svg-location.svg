@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="location-pin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 500 400" enable-background="new 0 0 500 400" xml:space="preserve">
+<linearGradient id="rectangle_1_" gradientUnits="userSpaceOnUse" x1="264.0473" y1="241.6144" x2="299.0169" y2="241.6144" gradientTransform="matrix(0.8553 -0.5181 0.5181 0.8553 -75.1991 162.9327)">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<polygon id="rectangle" fill="url(#rectangle_1_)" stroke="#000000" stroke-width="2.6806" stroke-miterlimit="10" points="
+	283.3,177.6 253.4,195.8 298.3,269.8 328.2,251.7 "/>
+<linearGradient id="circle_1_" gradientUnits="userSpaceOnUse" x1="161.4418" y1="118.8403" x2="346.3251" y2="118.8403" gradientTransform="matrix(0.9714 -0.2373 0.2373 0.9714 -45.5265 68.6447)">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<circle id="circle" fill="url(#circle_1_)" stroke="#000000" stroke-width="2.343" stroke-miterlimit="10" cx="229.3" cy="123.9" r="92.4"/>
+<polygon id="arrow" fill="#FCEE21" stroke="#000000" stroke-width="2.1902" stroke-miterlimit="10" points="231.6,295.9
+	399.8,395.5 379.5,206.3 "/>
+<g id="x">
+	<line fill="none" stroke="#000000" stroke-width="5.3179" stroke-miterlimit="10" x1="178.1" y1="118.8" x2="279.8" y2="127"/>
+	<line fill="none" stroke="#000000" stroke-width="5.3179" stroke-miterlimit="10" x1="209" y1="169.9" x2="244.8" y2="78.4"/>
+</g>
+</svg>
