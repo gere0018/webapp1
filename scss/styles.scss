@@ -1,4 +1,3 @@
-//TODO: push footer with vertical menu if possible.
 //Defaults*****************************************************************
 @import "variables";
 *{
@@ -15,7 +14,7 @@ html {
 }
 P{
     font-family: "Garamond", sans-serif;
-    font-size:1.4rem;
+     font-size: 1.2rem;
     color: $text;
 }
 
@@ -36,90 +35,22 @@ P{
 body{
     // set the starting size for the app
 	font-size:5vmin;
-    //requirements to push toggle menu
-    left:0;
-//    overflow-x: hidden;
 	position: relative;
-     -webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	transition: all 0.3s ease;
-}
-//class applied to body to push toggle menu to left
-.pushMenuToLeft{
-    left: -175px;
-    footer{
-       left: -175px;
-    }
-    //if menu is open and screen width increases(ex: orientation change),body push should go back to normal, not only vertical menu.
-    @media screen and (min-width:650px){
-        left:0;
-        footer{
-            left: 0;
-        }
-
-    }
-}
-//Header*******************************************************************
-
-.appTitle{
-    background-color: $header;
-    box-sizing: border-box;
-    padding: 0.5rem;
-    width: 100%;
-    h1{
-        text-align: center;
-        font-family: "Georgia", cursive;
-        font-size: 1.7rem;
-        color: #444;
-        letter-spacing: 2px;
-
-       @media screen and (max-width:650px){
-        display: inline;
-        width: 80%;
-        float: left;
-       }
-    }
-
-}
-//SVG toggle menu icon
-#toggle-menu{
-    display: inline;
-    width: 60px;
-    height: 50px;
-    float: right;
-    #X{
-    opacity: 0;
-    }
-    #line3{
-     opacity: 1;
-    }
-    //toggle menu disappears on devices with more than 500px width
-    @media screen and (min-width:650px){
-        display: none;
-    }
-}
-#toggle-menu.x-toggle-menu{
-    #X{
-      opacity: 1;
-    }
-    #line3{
-     opacity: 0;
-    }
 
 }
 
-//Navigation Bar or menu *****************************************************
-// Vertical Toggle Menu styles
+// Vertical Navigation styles **********************************************
 .verticalMenu {
 	position: fixed;
     width: 175px;
     height: 100%;
     right: -175px;
-	top: 4.5rem;
+	top: 0;
 	z-index: 900;
-    -webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+    padding-top: 4rem;
     a {
 	color: $text;
     background-color: $body;
@@ -138,37 +69,125 @@ body{
         background-color: $page;
     }
     //disappears on devices with more than 500px width
-    @media screen and (min-width:650px){
-        rigth: -175px;
+    @media screen and (min-width:500px){
+        display:none;
     }
 }
 .OpenverticalMenu {
-	right: 0;
+	right: 0px;
     background-color: $body;
-    opacity: 0.85;
-    @media screen and (min-width:650px){
+    }
+
+
+
+//Page Layout***********************************************************
+//Required properties for page transitions
+#pageWrapper{
+	position: relative;
+    left: 0;
+	width: 100%;
+	height: 100%;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+#pageWrapper.pageWrapperPushedLeft{
+        left: -175px;
+        footer{
+            left: -175px;
+        }
+       .appTitle{
+           left: -175px;
+        }
+        @media screen and (min-width:500px){
+        left:0;
+            footer{
+            left: 0;
+        }
+       .appTitle{
+           left: 0;
+        }
+
+        }
+    }
+
+//Header*******************************************************************
+.appTitle{
+    position: fixed;
+    background-color: $header;
+    width: 100%;
+    left: 0;
+    top:0;
+    height: 3.5rem;
+    z-index: 2;
+    -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+    h1{
+        box-sizing: border-box;
+        padding: 0.5rem;
+        text-align: center;
+        font-family: "Georgia", cursive;
+        font-size: 1.5rem;
+        color: #444;
+        letter-spacing: 2px;
+        display: inline;
+        width: 80%;
+        float: left;
+        @media screen and (min-width:500px){
+             width: 100%;
+        }
+
+       }
+
+}
+//SVG toggle menu icon
+#toggle-menu{
+    display: inline;
+    padding: 0;
+    width: 60px;
+    height: 50px;
+    float: right;
+    #X{
+    opacity: 0;
+    }
+    #line3{
+     opacity: 1;
+    }
+    //toggle menu disappears on devices with more than 500px width
+    @media screen and (min-width:500px){
         display: none;
     }
 }
+#toggle-menu.x-toggle-menu{
+    #X{
+      opacity: 1;
+    }
+    #line3{
+     opacity: 0;
+    }
+
+}
 
 //Main Naviguation bar/menu styles **************************************************
-
 .navBar{
+    position: fixed;
+    width: 100%;
+    top: 3.5rem;
     display: none;
     height:3rem;
+    z-index: 2;
+
     ul{
         list-style: none;
         margin: 0;
         background-color: $page;
         width: 100%;
-
-
     }
     li{
         float: left;
         height:3rem;
         width: 33.33%;
-
     }
     .button{
         color: #484848;
@@ -179,18 +198,16 @@ body{
         text-align: center;
         font-size: 1.5rem;
         font-family: "Georgia", cursive;
-
     }
     [href="#location"]{
         border-left: 1px solid $text;
         border-right: 1px solid $text;
     }
-
     .button.activeTab{
         background-color: $page;
     }
 //navBar appears as soon as vertical menu and togglemenu svg disappear.
-    @media screen and (min-width:650px){
+    @media screen and (min-width:500px){
         display: block;
     }
 }
@@ -222,7 +239,7 @@ svg{
                 fill:black;
             }
     }
-    .activeTab #contact1{
+.activeTab #contact1{
             -webkit-transform: scale(1.1);
             -moz-transform: scale(1.1);
             -o-transform: scale(1.1);
@@ -232,29 +249,17 @@ svg{
             }
     }
 
-//Page Layout***********************************************************
-//Required properties for page transitions
-.pageWrapper {
-//	position: relative;
-	width: 100%;
-	height: 88%;
-	-webkit-perspective: 1200px;
-	-moz-perspective: 1200px;
-	perspective: 1200px;
-}
 //All Pages
 [data-role = "page"]{
     color: $text;
-    box-sizing: border-box;
     background-color: $page;
     padding: 1rem;
-    padding-bottom: 60px;
     margin: 0rem;
     //for page transition
     position:absolute;
     width:100%;
 	height: 100%;
-    top: 0;
+    top: 3.5rem;
 	left: 0;
 	visibility: hidden;
     -webkit-backface-visibility: hidden;
@@ -268,10 +273,20 @@ svg{
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+    @media screen and (min-width:500px){
+        top: 6.5rem;
+        padding-bottom: 5rem;
+        canvas{
+            padding-bottom: 4rem;
+        }
+    }
+
+    .container{
+        width: 90%;
+    }
 
     h2{
-        font-weight: 150;
-        padding: 0.5rem;
+        padding-bottom: 0.5rem;
         font-size: 1.5rem;
         font-family: "Garamond", sans-serif;
     }
@@ -282,20 +297,7 @@ svg{
     z-index: 1;
 }
 //Location Page*********************************************
-#output{
-    width: 95%;
-    height: 95%;
-    margin: 0 auto;
-    overflow-x: auto;
-    overflow-y: auto;
-    //text align center is centering the canvas which is strange
-    text-align: center;
-    @media screen and (min-width: 900px){
-        width: 60%;
-        margin-left: 20%;
-    }
 
-}
 //Contacts Page*********************************************
 #contactsOutput{
     margin: 0 auto;
@@ -307,14 +309,12 @@ svg{
 }
 #selectBtn{
     padding: 0.5rem;
-    margin: 1rem;
+    margin-top: 1rem;
     border-radius: 25px;
     font-family: "Garamond", sans-serif;
     font-size:1.4rem;
     color: $header;
     background-color: $body;
-
-
             }
 
 //Footer****************************************************************
@@ -324,12 +324,13 @@ svg{
       margin: 0rem;
       position:fixed;
       width: 100%;
-      bottom: 0;
       left: 0;
-      height: 60px;
-      -webkit-transition: all 0.3s ease;
-      -moz-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      bottom: 0;
+      height: 3rem;
+      z-index: 1000;
+     -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 
     P{
         text-align: center;

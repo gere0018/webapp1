@@ -1,31 +1,39 @@
-/*Pages Transitions (case 49)******************************************************/
-.pt-page-rotateFoldBottom {
-  -webkit-transform-origin: 50% 0%;
-  transform-origin: 50% 0%;
-  -webkit-animation: rotateFoldBottom .7s both ease;
-  animation: rotateFoldBottom .7s both ease; }
+/*Pages Transitions******************************************************/
+/* rotate newspaper */
+.pt-page-rotateOutNewspaper {
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-animation: rotateOutNewspaper 1s both ease-in;
+  animation: rotateOutNewspaper 1s both ease-in; }
 
-@-webkit-keyframes rotateFoldBottom {
-  to {
-    opacity: 0;
-    -webkit-transform: translateY(100%) rotateX(-90deg); } }
-@keyframes rotateFoldBottom {
-  to {
-    opacity: 0;
-    -webkit-transform: translateY(100%) rotateX(-90deg);
-    transform: translateY(100%) rotateX(-90deg); } }
-.pt-page-moveFromTopFade {
-  -webkit-animation: moveFromTopFade .7s ease both;
-  animation: moveFromTopFade .7s ease both; }
+.pt-page-rotateInNewspaper {
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-animation: rotateInNewspaper 1s both ease-out;
+  animation: rotateInNewspaper 1s both ease-out; }
 
-@-webkit-keyframes moveFromTopFade {
+.pt-page-delay500 {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s; }
+
+/* newspaper */
+@-webkit-keyframes rotateOutNewspaper {
+  to {
+    -webkit-transform: translateZ(-3000px) rotateZ(360deg) scale(0);
+    opacity: 0; } }
+@keyframes rotateOutNewspaper {
+  to {
+    -webkit-transform: translateZ(-3000px) rotateZ(360deg) scale(0);
+    transform: translateZ(-3000px) rotateZ(360deg) scale(0);
+    opacity: 0; } }
+@-webkit-keyframes rotateInNewspaper {
   from {
-    opacity: 0.3;
-    -webkit-transform: translateY(-100%); } }
-@keyframes moveFromTopFade {
+    -webkit-transform: translateZ(-3000px) rotateZ(-360deg) scale(0);
+    opacity: 0; } }
+@keyframes rotateInNewspaper {
   from {
-    opacity: 0.3;
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%); } }
+    -webkit-transform: translateZ(-3000px) rotateZ(-360deg) scale(0);
+    transform: translateZ(-3000px) rotateZ(-360deg) scale(0);
+    opacity: 0; } }
 
 /*# sourceMappingURL=page-transitions.css.map */

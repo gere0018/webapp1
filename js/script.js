@@ -1,57 +1,65 @@
 var app1_gere0018 = {
-    page:[],
+    pages:[],
     numPages:0,
     links:[],
     numLinks:0,
+    pageWrapper: "",
     toggleMenuIcon:"",
     verticalMenu: "",
-    selectBtn:"",
+    deviceContacts: "",
     initialize: function() {
         app1_gere0018.bindEvents();
     },
     bindEvents: function() {
       document.addEventListener('deviceready', app1_gere0018.onDeviceReady, false);
-      document.addEventListener("DOMContentLoaded", app1_gere0018.onDeviceReady, false);
+      document.addEventListener("DOMContentLoaded", app1_gere0018.onDomReady, false);
     },
     onDeviceReady: function() {
-      app1_gere0018.receivedEvent('deviceready');
+        //When device is ready read the contacts on the device
+     var options = new ContactFindOptions( );
+        options.filter = "";  //leaving this empty will find return all contacts
+        options.multiple = true;  //return multiple results
+        var filter = ["displayName"]; //an array of fields to compare against the options.filter
+        navigator.contacts.find(filter, app1_gere0018.contactsSuccess, app1_gere0018.contactsError, options);
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    onDomReady: function(id) {
       app1_gere0018.prepareNavigation();
-        //Add touch and click listener to toggleMenuIcon.
-      toggleMenuIcon = document.querySelector("#toggle-menu");
+    },
+
+    prepareNavigation:function(){
+        console.log("Inside preparenavgatin");
+        //add Listeners to toggle menu icon
+       toggleMenuIcon = document.querySelector("#toggle-menu");
         if(app1_gere0018.detectTouchSupport( )){
             toggleMenuIcon.addEventListener("touchend", app1_gere0018.handleTouch);
          }
        toggleMenuIcon.addEventListener("click", app1_gere0018.showMenu);
 
-    },
-    showMenu:function(){
-        //change toggle menu icon to an x shape when clicked
-        toggleMenuIcon.classList.toggle("x-toggle-menu");
-        verticalMenu = document.querySelector(".verticalMenu");
-        //change class of body to allow the push transition.
-        document.body.classList.toggle("pushMenuToLeft");
-        verticalMenu.classList.toggle("OpenverticalMenu");
-    },
-    prepareNavigation:function(){
        pages = document.querySelectorAll('[data-role="page"]');
 	   numPages = pages.length;
 	   links = document.querySelectorAll(".button");
 	   numLinks = links.length;
-        //looping through my links and adding touch and click events
+        //loop through my links and addlisteners to touch and click events
 	   for(var i=0;i<numLinks; i++){
            if(app1_gere0018.detectTouchSupport( )){
                 links[i].addEventListener("touchend", app1_gere0018.handleTouch, false);
             }
-           //Must add event listener on click even if touch is supported.handletouch will transform touch into a click, but we still need to attach event listener to the click with line below.
            links[i].addEventListener("click", app1_gere0018.handleNav, false);
+
        }
-        //For browser's back button, add a click listener
+        //add listener to browser's back button
        window.addEventListener("popstate", app1_gere0018.browserBackButton, false);
-        //loading the first page with url=null
+        console.log("Calling loadPage");
+        //load the first page with url=null
 	   app1_gere0018.loadPage(null);
+        //Add touch/click listener to contacts button
+        var selectBtn = document.querySelector("#selectBtn");
+        if(app1_gere0018.detectTouchSupport( )){
+            selectBtn.addEventListener("touchend", app1_gere0018.handleTouch);
+         }
+        selectBtn.addEventListener("click", app1_gere0018.selectRandomContact);
+
     },
     //Transform the touch event into a mouse event "click":
     handleTouch:function (ev){
@@ -66,56 +74,63 @@ var app1_gere0018 = {
     },
     //handle the click event
     handleNav:function (ev){
-        // prevent page reload
-        ev.preventDefault();
-        //wether svg text or a button is clicked,current target registers the click for the main element which is (.button).
+        ev.preventDefault();// preventing page reload
         var href = ev.currentTarget.href;
-        //Split returns an array with 2 strings, the string before # and the string after the #.
-        var parts = href.split("#");
+        var parts = href.split("#");//returns an array with 2 strings, the string before # and the string after the #.
         app1_gere0018.loadPage( parts[1] );
         return false;
+
+    },
+    showMenu:function(){
+        //change toggle menu icon to an x shape when clicked
+        toggleMenuIcon.classList.toggle("x-toggle-menu");
+        verticalMenu = document.querySelector(".verticalMenu");
+        pageWrapper = document.querySelector("#pageWrapper");
+        pageWrapper.classList.toggle("pageWrapperPushedLeft");
+        verticalMenu.classList.toggle("OpenverticalMenu");
     },
 
-    //Deal with switching pages and history Api
+    //Deal with history API and switching divs
     loadPage:function ( url ){
         if(url == null){
             //home page first call
-            pages[0].className = "activePage";
-            history.replaceState(null, null, "#home");
+            pages[0].className = "activePage button";
+            history.pushState(null, null, "#home");
+            setTimeout(function(){
+                window.scrollTo(0,0);
+            },100);
+
         }else{
-            //loop through pages and toggle transitions and active page class
+            //loop through pages
             for(var i=0; i < numPages; i++){
-              //In page transition *******************************************
-                if(pages[i].id == url){
-                     pages[i].className = "activePage";
-                     pages[i].classList.add("pt-page-moveFromTopFade");
+                //In Page:for the selected page to become active page
+              if(pages[i].id == url){
+                  pages[i].className = "activePage pt-page-rotateInNewspaper pt-page-delay500";
+
                   //making vertical menu disapper when we select a tab.
-                  verticalMenu = document.querySelector("#verticalMenu");
                   if(verticalMenu.className == "verticalMenu OpenverticalMenu"){
-                      verticalMenu.classList.remove("OpenverticalMenu");                                    document.body.classList.toggle("pushMenuToLeft");
+                      verticalMenu.classList.toggle("OpenverticalMenu");
                       toggleMenuIcon.classList.toggle("x-toggle-menu");
+                      pageWrapper.classList.toggle("pageWrapperPushedLeft");
                   }
 
                   if(pages[i].id == "location"){
                   app1_gere0018.setLocation();
                   }
-                  if(pages[i].id == "contact"){
-                        app1_gere0018.launchContactPicker();
-                  }
+
                 history.pushState(null, null, "#" + url);
               }else{
-                  //Out pages
+                  //Out Page:for the other page that was active and will be replaced
                   var classes = pages[i].getAttribute("class");
                   if (classes && (-1 !== classes.indexOf("activePage"))){
-                       pages[i].classList.remove("pt-page-moveFromTopFade");
-                       pages[i].classList.add("pt-page-rotateFoldBottom");
+                       pages[i].className = "activePage pt-page-rotateOutNewspaper";
                     setTimeout(function(pg){
                        pg.classList.remove("activePage");
-                       pg.classList.remove("pt-page-rotateFoldBottom");
-                        }, 300, pages[i]);
-                    }
+                       pg.classList.remove("pt-page-rotateOutNewspaper");
+                        }, 1000, pages[i]);
+                   }
                 }
-             }
+            }
 
             }
             //loop through links
@@ -198,52 +213,51 @@ var app1_gere0018 = {
  //in case of erros the following function gives an explanation of type of error to the user.
       alert("Error: " + errors[error.code]);
     },
-    launchContactPicker: function (){
-        selectBtn = document.querySelector("#selectBtn");
-        if(app1_gere0018.detectTouchSupport( )){
-            selectBtn.addEventListener("touchend", app1_gere0018.handleTouch);
-         }
-        selectBtn.addEventListener("click", function (){
-            console.log("Selection button is clicked.");
-            if(navigator.contacts){
-                navigator.contacts.pickContact(app1_gere0018.selectContact, app1_gere0018.errFunc);
-            }else{
-                alert("Sorry, you can select your contact only on a mobile device");
-            }
-
-            });
-    },
-
-    selectContact: function ( pickedContact ){
-         selectBtn.innerHTML = "Change contact";
-          var contactsOutput = document.querySelector("#contactsOutput");
-          contactsOutput.innerHTML = "<h4>Your Emergency Contact's info: </h4></br>" +
-                                      "<p>Name: " +  pickedContact.displayName + "<p></br>";
+    selectRandomContact: function (){
+        //generate random number
+        this.innerHTML = "Change Contact";
+        var randomNumber = Math.floor(Math.random()* deviceContacts.length);
+        var contactsOutput = document.querySelector("#contactsOutput");
+       contactsOutput.innerHTML = "<h4>Your Emergency Contact's info: </h4></br>" +
+               "<p>Name: " +  deviceContacts[randomNumber].displayName + "<p></br>";
         // Display Contact's Phone number ******************************************
         var contactNumber;
-          if(pickedContact.phoneNumbers== null){
+          if(deviceContacts[randomNumber].phoneNumbers== null){
               contactNumber= "This contact has no saved number";
           }else{
-              contactNumber= pickedContact.phoneNumbers[0].value;
+              contactNumber= deviceContacts[randomNumber].phoneNumbers[0].value;
           }
          contactsOutput.innerHTML += "<p>Phone number: " + contactNumber  + "<p></br>";
 
-
         // Display Contact's address ***********************************************
         var contactAddress;
-         if(pickedContact.addresses== null) {
+         if(deviceContacts[randomNumber].addresses== null) {
             contactAddress = "This contact has no saved address";
          }else{
-           contactAddress = pickedContact.addresses[0].formatted;
+           contactAddress = deviceContacts[randomNumber].addresses[0].formatted;
          }
 
          contactsOutput.innerHTML += "<p>Address: " +  contactAddress + "<p></br>";
+        var contactPhoto;
+        if(deviceContacts[randomNumber].photos== null) {
+           contactPhoto = "This contact has no saved photo";
+         }else{
+           contactPhoto = deviceContacts[randomNumber].photos[0].value;
+           contactsOutput.innerHTML += "<img src = " + contactPhoto + "></img></br>";
+         }
+
 
     },
-    errFunc:function (){
+    contactsError:function (){
         alert("sorry !! we are not able to load your contact right now!!")
 
+    },
+
+    contactsSuccess: function (contacts){
+//saved the contacts returned from success function in the variable deviceContacts
+        deviceContacts = contacts;
     }
 
-};
+ };
+
 app1_gere0018.initialize();
